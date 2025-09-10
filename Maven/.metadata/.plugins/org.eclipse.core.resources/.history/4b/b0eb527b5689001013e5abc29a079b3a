@@ -1,0 +1,79 @@
+package test;
+ 
+import java.io.FileReader;
+import java.io.IOException;
+import java.time.Duration;
+import java.util.Properties;
+
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.Test;
+ 
+import pages.ElementLocator;
+ 
+public class RunProject {
+	
+	WebDriver driver;
+  @Test
+  public void execute() throws IOException, InterruptedException {
+	    driver = new ChromeDriver();
+	    driver.manage().window().maximize();
+		FileReader fr = new FileReader("C:\\Users\\Praveenraj.t\\Maven\\Project\\src\\test\\java\\test\\input.properties");
+		Properties p = new Properties();
+		p.load(fr);
+		driver.get(p.getProperty("url"));
+		ElementLocator element = new ElementLocator(driver);
+		element.signupName(p.getProperty("name"));
+		element.signupEmail(p.getProperty("email"));
+		element.clickSignup();
+		
+		boolean check = element.isAlreadyRegistered();
+		String query = p.getProperty("query");
+		if(check) {
+			System.out.println("User email registered");
+			element.loginEmail(p.getProperty("email"));
+			element.loginPassword(p.getProperty("password"));
+			element.loginButton();
+			System.out.println("-----------------------------Login-----------------------");
+			
+//			String query = p.getProperty("query");
+			System.out.println(query);
+			if(query=="True"){
+				System.out.println(query);
+			element.Contact();
+			element.Contact_Name(p.getProperty("name"));
+			element.Contact_Email(p.getProperty("email"));
+			element.Contact_Subject(p.getProperty("subject"));
+			element.Contact_Message(p.getProperty("message"));
+			element.Contact_File();
+			element.Contact_Submit();
+			Alert alert = driver.switchTo().alert();
+			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+			alert.accept();
+			element.ContacttoHome();}
+			
+		}else {
+			element.selectTitle(p.getProperty("title"));
+			element.enterPassword(p.getProperty("password"));
+			element.enterFirstName(p.getProperty("firstname"));
+			element.enterLastName(p.getProperty("lastname"));
+			element.enterCompany(p.getProperty("company"));
+			element.enterAddress(p.getProperty("address"));
+			element.selectCountry(p.getProperty("country"));
+			element.enterState(p.getProperty("state"));
+			element.enterCity(p.getProperty("city"));
+			element.enterZipcode(p.getProperty("zipcode"));
+			element.enterNumber(p.getProperty("number"));
+			
+			element.createAccount();
+			element.continueButton();
+			
+			Thread.sleep(5000);
+			element.clickLogout();
+			System.out.println("--------------------Created-----------------------------");
+		}		
+		  
+  }
+  
+}

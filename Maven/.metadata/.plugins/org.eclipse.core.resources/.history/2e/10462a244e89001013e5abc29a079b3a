@@ -1,0 +1,214 @@
+package pages;
+ 
+import java.time.Duration;
+ 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.annotations.Test;
+
+ 
+public class ElementLocator {
+	WebDriver driver;
+	By signupname = By.xpath("//input[@data-qa='signup-name']");
+	By signupemail = By.xpath("//input[@data-qa='signup-email']");
+	By signupButton = By.xpath("//button[@data-qa='signup-button']"); 
+	By selectMale = By.id("id_gender1");
+	By selectFemale = By.id("id_gender2");
+	By password = By.id("password");
+	By firstName = By.id("first_name");
+	By lastName = By.id("last_name");
+	By company = By.id("company");
+	By address = By.id("address1");
+	By country = By.id("country");
+	By state = By.id("state");
+	By city = By.id("city");
+	By zipcode = By.id("zipcode");
+	By mobileNumber = By.id("mobile_number");
+
+	By submit = By.xpath("//button[@data-qa='create-account']");
+	By afterSubmit = By.xpath("//a[@data-qa='continue-button']");
+	By logout = By.xpath("//a[text()=' Logout']");
+
+	By loginEmail = By.xpath("//input[@data-qa='login-email']");
+	By loginPassword = By.xpath("//input[@data-qa='login-password']");
+	By login = By.xpath("//button[@data-qa='login-button']");
+	
+	By Contact_Name = By.xpath("//input[@data-qa='name']");
+	By Contact_Email = By.xpath("//input[@data-qa='email']");
+	By Contact_Subject = By.xpath("//input[@data-qa='subject']");
+	By Contact_Message = By.xpath("//textarea[@data-qa='message']");	
+	By Contact = By.xpath("//a[text()=' Contact us']");
+	By Contact_File = By.xpath("//input[@type='file']");
+	By Contact_Submit = By.xpath("//input[@data-qa='submit-button']");
+	
+	@Test
+  public void signupName(String name) {
+	  driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+	  WebElement sName = driver.findElement(signupname);
+	  sName.sendKeys(name);
+	  System.out.println("Name: "+sName.getAttribute("value"));
+  }
+  public void signupEmail(String email) {
+	  driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+	  WebElement sEmail = driver.findElement(signupemail);
+	  sEmail.sendKeys(email);
+	  System.out.println("Email: "+sEmail.getAttribute("value"));
+  }
+  public void clickSignup() {
+	  driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+	  driver.findElement(signupButton).click();
+  }
+  public void selectTitle(String type) {
+	  driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+	  String displayType = "";
+	  if(type.equals("Male")) {
+		  WebElement male = driver.findElement(selectMale);
+		  male.click();
+		  displayType=male.getAttribute("value");
+	  }else {
+		  WebElement female = driver.findElement(selectFemale);
+		  female.click();
+		  displayType=female.getAttribute("value");
+	  }
+	  System.out.println("Gender: "+displayType);
+  }
+  public void enterPassword(String pword) {
+	  driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+	  WebElement p = driver.findElement(password);
+	  p.sendKeys(pword);
+	  System.out.println("Password "+p.getAttribute("value"));
+  }
+  public void enterFirstName(String fname) {
+	  driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+	  WebElement f = driver.findElement(firstName);
+	  f.sendKeys(fname);
+	  System.out.println("FirstName: "+f.getAttribute("value"));
+  }
+  public void enterLastName(String lname) {
+	  driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+	  WebElement l = driver.findElement(lastName);
+	  l.sendKeys(lname);
+	  System.out.println("Last Name "+l.getAttribute("value"));
+  }
+  public void enterCompany(String compny) {
+	  driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+	  WebElement c = driver.findElement(company);
+	  c.sendKeys(compny);
+	  System.out.println("Company "+c.getAttribute("value"));
+  }
+
+  public void enterAddress(String adrs) {
+	  driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+	  WebElement a = driver.findElement(address);
+	  a.sendKeys(adrs);
+	  System.out.println("Address "+a.getAttribute("value"));
+  }
+	public void selectCountry(String ctry) throws InterruptedException {
+		 driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+		WebElement c = driver.findElement(country);
+		Select dropdown = new Select(c);
+		dropdown.selectByVisibleText(ctry);
+		System.out.println("Country: "+c.getAttribute("value"));
+	}
+	public void enterState(String ste) {
+		  driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		  WebElement a = driver.findElement(state);
+		  a.sendKeys(ste);
+		  System.out.println("State "+a.getAttribute("value"));
+	  }
+	public void enterCity(String cty) {
+		  driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		  WebElement a = driver.findElement(city);
+		  a.sendKeys(cty);
+		  System.out.println("City "+a.getAttribute("value"));
+	  }
+	public void enterZipcode(String pin) {
+		  driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		  WebElement a = driver.findElement(zipcode);
+		  a.sendKeys(pin);
+		  System.out.println("Zipcode "+a.getAttribute("value"));
+	  }
+	public void enterNumber(String num) {
+		  driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		  WebElement a = driver.findElement(mobileNumber);
+		  a.sendKeys(num);
+		  System.out.println("Mobile "+a.getAttribute("value"));
+	  }
+	public void createAccount() {
+		  driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		  driver.findElement(submit).click();
+		  System.out.println("Account Created");
+	}  
+	public void continueButton() {
+		  driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		  driver.findElement(afterSubmit).click();
+	}
+	public void clickLogout() {
+		  driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		driver.findElement(logout).click();
+	}
+	public void loginEmail(String email) {
+		  driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		  WebElement l = driver.findElement(loginEmail);
+		  l.sendKeys(email);
+		  System.out.println("Login Email: "+l.getAttribute("value"));
+	}
+	public void loginPassword(String password) {
+		  driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		  WebElement p = driver.findElement(loginPassword);
+		  p.sendKeys(password);
+		  System.out.println("Login Password: "+p.getAttribute("value"));
+	}
+	public void loginButton() {
+		  driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		  driver.findElement(login).click();
+	}
+	public void Contact() {
+		  driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		  driver.findElement(Contact).click();
+	}
+	public void Contact_Name(String Cn) {
+		  driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		  driver.findElement(Contact_Name).sendKeys(Cn);
+	}
+	public void Contact_Email(String Em) {
+		  driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		  driver.findElement(Contact_Email).sendKeys(Em);
+	}
+	public void Contact_Subject(String S) {
+		  driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		  driver.findElement(Contact_Subject).sendKeys(S);
+	}
+	public void Contact_Message(String M) {
+		  driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		  driver.findElement(Contact_Message).sendKeys(M);
+	}
+	public void Contact_File() {
+		  driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		  WebElement File = driver.findElement(Contact_File);
+		  File.sendKeys("C:\\Users\\Praveenraj.t\\Maven\\Project\\src\\test\\java\\test\\input.properties");
+	}
+	public void Contact_Submit() {
+		  driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		  driver.findElement(Contact_Submit).click();
+	}
+	public void Alert() {
+
+	}
+	public boolean isAlreadyRegistered() {
+		  driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		  boolean b;
+		  try {
+			  WebElement isPresent = driver.findElement(By.xpath("//p[text()='Email Address already exist!']"));
+			  return isPresent.isDisplayed();
+		  }catch(Exception e) {
+			  b= false;
+		  }
+		  return b;
+	}
+  public ElementLocator(WebDriver driver) {
+	  this.driver = driver;  
+  }
+}

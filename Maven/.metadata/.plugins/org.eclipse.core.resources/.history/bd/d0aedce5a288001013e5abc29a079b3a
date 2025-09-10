@@ -1,0 +1,151 @@
+package pages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.annotations.Test;
+
+public class Login {
+	WebDriver driver = null;
+	By Name = By.xpath("//input[@type='text']");
+	By Email = By.xpath("//input[@data-qa='signup-email']");
+	By Submit = By.xpath("//button[@data-qa='signup-button']");
+	
+	By EmailExist = By.xpath("//p[text()='Email Address already exist!']");
+	
+	By Title = By.id("id_gender1");
+	By Password = By.xpath("//input[@data-qa='password']");
+	By Date = By.id("days");
+	By Month = By.id("months");
+	By Year = By.id("years");
+	By CheckBox1 = By.id("newsletter");
+	By CheckBox2 = By.id("optin");
+	
+	By Fn = By.xpath("//input[@data-qa='first_name']");
+	By Ln = By.xpath("//input[@data-qa='last_name']");
+	By Company = By.xpath("//input[@data-qa='company']");
+	By Address1 = By.xpath("//input[@data-qa='address']");
+	By Address2 = By.xpath("//input[@data-qa='address2']");
+	By State = By.xpath("//input[@data-qa='state']");
+	By City = By.xpath("//input[@data-qa='city']");
+	By Code = By.xpath("//input[@data-qa='zipcode']");
+	By Phno = By.xpath("//input[@data-qa='mobile_number']");
+	By CreateAccount = By.xpath("//button[@data-qa='create-account']");
+	By ContinueBtn = By.xpath("//a[@data-qa='continue-button']");
+	By Logout = By.xpath("//a[text()=' Logout']");
+	
+	
+  @Test
+  public void Name(String input)
+	 {
+	  WebElement typedtext_0 = driver.findElement(Name);
+		typedtext_0.sendKeys(input);
+		System.out.println("hi"+typedtext_0.getAttribute("value"));
+	 }
+  public void Email(String input)
+	 {
+	  	WebElement typedtext = driver.findElement(Email);
+		typedtext.sendKeys(input);
+		System.out.println("hi"+typedtext.getAttribute("value"));
+	 }
+  public void Submit()
+	 {
+		 driver.findElement(Submit).click();
+	 }
+  public void EmailExist(String input)
+	 {
+	  	WebElement Emailexist = driver.findElement(EmailExist);
+		String value = Emailexist.getAttribute("value");
+		
+	 }
+  
+  public void Title()
+	 {
+		 driver.findElement(Title).click();
+	 }
+  public void Password(String input)
+	 {
+		 driver.findElement(Password).sendKeys(input);
+	 }
+  public void Date(String input)
+	 {
+	 //WebElement date = driver.findElement(Date);
+     Select selectdate = new Select(driver.findElement(Date));
+     selectdate.selectByValue(input);
+	 }
+  public void Month(String input)
+	 {
+	 WebElement month = driver.findElement(Month);
+     Select selectmonth = new Select(month);
+     selectmonth.selectByVisibleText(input);
+	 }
+  public void Year(String input)
+	 {
+	 WebElement year = driver.findElement(Year);
+     Select selectyear = new Select(year);
+     selectyear.selectByValue(input);
+	 }
+  public void CheckBox1()
+	 {
+		 driver.findElement(CheckBox1).click();
+	 }
+  public void CheckBox2()
+	 {
+		 driver.findElement(CheckBox2).click();
+	 }
+  public void Fn(String input)
+	 {
+		 driver.findElement(Fn).sendKeys(input);
+	 }
+  public void Ln(String input)
+	 {
+		 driver.findElement(Ln).sendKeys(input);
+	 }
+  public void Company(String input)
+	 {
+		 driver.findElement(Company).sendKeys(input);
+	 }
+  public void Address1(String input)
+	 {
+		 driver.findElement(Address1).sendKeys(input);
+	 }
+  public void Address2(String input)
+	 {
+		 driver.findElement(Address2).sendKeys(input);
+	 }
+  public void State(String input)
+	 {
+		 driver.findElement(State).sendKeys(input);
+	 }
+  public void City(String input)
+	 {
+		 driver.findElement(City).sendKeys(input);
+	 }
+  public void Code(String input)
+	 {
+		 driver.findElement(Code).sendKeys(input);
+	 }
+  public void Phno(String input)
+	 {
+		 driver.findElement(Phno).sendKeys(input);
+	 }
+  public void CreateAccount()
+	 {
+		 driver.findElement(CreateAccount).click();
+	 }
+  public void ContinueBtn()
+	 {
+		 driver.findElement(ContinueBtn).click();
+	 }
+  public void Logout()
+	 {
+		 driver.findElement(Logout).click();
+	 }
+  
+  public Login(WebDriver driver)
+	 {
+		 this.driver = driver;
+	 }
+
+}

@@ -1,0 +1,171 @@
+package tests;
+
+import org.testng.annotations.Test;
+import org.testng.annotations.BeforeTest;
+
+import java.io.FileReader;
+import java.time.Duration;
+import java.util.Properties;
+
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.edge.EdgeDriver;
+import org.testng.annotations.AfterTest;
+
+import pages.RegForm;
+import pages.contactForm;
+import pages.purchaseProduct;
+public class RegFormTest {
+	 Properties p;
+     WebDriver driver;
+     
+  @Test(priority = 1)
+  public void signup() throws Exception {
+	  RegForm p1 =new RegForm(driver);
+	  p1.enterName(p.getProperty("Name"));
+	  p1.enterEmailAddress(p.getProperty("EmailAddress"));
+	  p1.clicksignup();
+	  
+	  boolean check = p1.ifuserAlreadyRegistered();
+		
+		if(check) { 
+			//Old User
+			System.out.println("----------- Old User Login registered -----------");
+			p1.loginEmail(p.getProperty("EmailAddress"));
+			p1.loginPassword(p.getProperty("Password"));
+			p1.loginButton();
+			System.out.println("-----------------------------Login-----------------------");
+			
+			//Product 
+		}
+		
+		else {
+	  //New User
+	  System.out.println("----------- New user Login Successfully ------------");
+	  p1.clickTitle(p.getProperty("Title"));
+	  p1.enterpassword(p.getProperty("Password"));
+	  
+	  p1.chooseday(p.getProperty("Day"));
+	  p1.choosemonth(p.getProperty("Month"));
+	  p1.chooseyear(p.getProperty("Year"));
+	  
+	  p1.enterFirstName(p.getProperty("FirstName"));
+	  p1.enterLastName(p.getProperty("LastName"));
+	  
+	  p1.enterCompanyName(p.getProperty("Company"));
+	  p1.enterAddress(p.getProperty("Address"));
+	  p1.entercountry(p.getProperty("Country"));
+	  
+	  p1.enterState(p.getProperty("State"));
+	  p1.enterCity(p.getProperty("City"));
+	  p1.enterPostalCode(p.getProperty("Zipcode"));
+	  p1.enterMobileNumber(p.getProperty("MobileNumber"));
+	  
+	  p1.sumbit();
+	  p1.continueButton();
+	
+	  System.out.println("----------- New User Registration Completed ------------");
+	}
+  }
+  
+  @Test(priority = 2, dependsOnMethods = { "signup" })
+  public void purchaseProduct() throws Exception {
+	  purchaseProduct p2 = new purchaseProduct(driver);
+	  Thread.sleep(1000);
+	//purchaseProduct
+			System.out.println("----------- product Page Loaded Successfully ----------");
+			p2.clickproduct();
+			p2.enterproductname(p.getProperty("ProductName"));
+			p2.searchproduct();
+			p2.productview();
+			p2.Addproductlevel(p.getProperty("AddQuantity"));
+			p2.addcartInProduct();
+			p2.continuebutton();
+			p2.clickproduct();
+			p2.addproduct1();
+			p2.continuebutton();
+			p2.addproduct2();
+			p2.continuebutton();
+			p2.brand();
+			p2.addproduct33();
+			p2.continuebutton();
+			
+			//Cart
+			
+			p2.clickcart();
+			p2.checkoutButton();
+			p2.placeorderButton();
+			
+			//payment
+			
+			p2.entercardName(p.getProperty("NameOnCard"));
+			p2.entercardNumber(p.getProperty("CardNumber"));
+			p2.entercardcvc(p.getProperty("CVCNumber"));
+			p2.enterexpmonth(p.getProperty("Exp_Month"));
+			p2.enterexpyear(p.getProperty("Exp_year"));
+			p2.enterpayButton();
+			
+			p2.download();
+			p2.clickcontinue();
+			System.out.println("----------- product Page completed Successfully ----------");
+  }
+
+  
+ @Test(priority = 3, dependsOnMethods = { "purchaseProduct" })
+ public void contactform() throws Exception {
+	 contactForm p3= new contactForm(driver);
+	  Thread.sleep(1000);
+	//ContactUs
+		System.out.println("----------- Contact Page Loaded Successfully -------------");
+		p3.clickcontact();
+		p3.usname(p.getProperty("Name1"));
+		p3.usemail(p.getProperty("Mail"));
+		p3.usesubject(p.getProperty("Subject"));
+		p3.usemessage(p.getProperty("Message"));
+		
+		p3.choosefile();
+		p3.contactsumbit();
+		Alert alert = driver.switchTo().alert();
+		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		alert.accept();
+		p3.contacthome();
+		System.out.println("----------- Contact Page completed Successfully ------------");
+ }
+  
+  
+  @BeforeTest
+  public void beforeTest() throws Exception{
+	  
+	// Load properties
+	  	FileReader fr = new FileReader("C:\\Users\\santhosh.v\\Desktop\\Training_Project\\Automation_Exercise\\src\\test\\resources\\Data.properties");
+		p = new Properties();
+	    p.load(fr);
+	    System.out.println("✓ Properties file loaded successfully");
+	    
+	 // Setup WebDriver
+	    driver = new EdgeDriver();
+		driver.get(p.getProperty("url"));
+		driver.manage().window().maximize();
+		System.out.println("✓ Chrome browser launched successfully");
+		String title = driver.getTitle();
+		System.out.println("Title: "+title);
+  }
+
+  @AfterTest
+  public void afterTest() throws Exception {
+	//LogOut
+	  Thread.sleep(1000);
+	  WebElement logout = driver.findElement(By.xpath("//a[text()=' Logout']"));
+	  logout.click();
+	  Thread.sleep(1000);
+	  if (driver != null) {
+          driver.quit();
+        System.out.println("✓ Browser closed successfully");      
+        }
+	  
+  }
+
+}

@@ -1,0 +1,69 @@
+package test;
+
+import java.io.FileReader;
+import java.util.Properties;
+
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.annotations.Test;
+import pages.Login;
+
+public class Run {
+	static WebDriver driver = null;
+  @Test
+  public static void signup() throws Exception {
+		driver = new ChromeDriver();
+		Login S = new Login(driver);
+		Thread.sleep(2000);
+		
+		FileReader fr = new FileReader("C:\\Users\\Praveenraj.t\\Maven\\Project\\src\\test\\java\\test\\input.properties");
+		Properties p = new Properties();
+		p.load(fr);
+		
+		driver.get(p.getProperty("url"));
+		driver.manage().window().maximize();
+		
+		Thread.sleep(1000);
+		S.Name(p.getProperty("name"));
+		Thread.sleep(3000);
+		S.Email(p.getProperty("email"));
+		Thread.sleep(1000);
+		S.Submit();
+		Thread.sleep(1000);
+		S.Title();
+		Thread.sleep(1000);
+		S.Password(p.getProperty("password"));
+		Thread.sleep(1000);
+		S.Date(p.getProperty("date"));
+		Thread.sleep(3000);
+		S.Month(p.getProperty("month"));
+		Thread.sleep(3000);
+		S.Year(p.getProperty("year"));
+		Thread.sleep(3000);
+		S.CheckBox1();
+		Thread.sleep(3000);
+		S.CheckBox2();
+		Thread.sleep(3000);
+		S.Fn(p.getProperty("fn"));
+		Thread.sleep(3000);
+		S.Ln(p.getProperty("ln"));
+		Thread.sleep(3000);
+		S.Company(p.getProperty("company"));
+		Thread.sleep(3000);
+		S.Address1(p.getProperty("address1"));
+		Thread.sleep(3000);
+		S.Address2(p.getProperty("address2"));
+		Thread.sleep(3000);
+		S.State(p.getProperty("state"));
+		Thread.sleep(3000);
+		S.City(p.getProperty("city"));
+		Thread.sleep(3000);
+		S.Code(p.getProperty("code"));
+		Thread.sleep(3000);
+		S.Phno(p.getProperty("phno"));
+		Thread.sleep(3000);
+		S.CreateAccount();
+		Thread.sleep(3000);
+		S.ContinueBtn();
+  }
+}

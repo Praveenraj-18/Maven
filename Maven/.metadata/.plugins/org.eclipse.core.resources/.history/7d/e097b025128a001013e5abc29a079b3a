@@ -1,0 +1,298 @@
+package pages;
+ 
+import java.time.Duration;
+ 
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.Select;
+import org.testng.annotations.Test;
+
+ 
+public class ElementLocator {
+	WebDriver driver;
+	By signupname = By.xpath("//input[@data-qa='signup-name']");
+	By signupemail = By.xpath("//input[@data-qa='signup-email']");
+	By signupButton = By.xpath("//button[@data-qa='signup-button']"); 
+	By selectMale = By.id("id_gender1");
+	By selectFemale = By.id("id_gender2");
+	By password = By.id("password");
+	By firstName = By.id("first_name");
+	By lastName = By.id("last_name");
+	By company = By.id("company");
+	By address = By.id("address1");
+	By country = By.id("country");
+	By state = By.id("state");
+	By city = By.id("city");
+	By zipcode = By.id("zipcode");
+	By mobileNumber = By.id("mobile_number");
+
+	By submit = By.xpath("//button[@data-qa='create-account']");
+	By afterSubmit = By.xpath("//a[@data-qa='continue-button']");
+	By logout = By.xpath("//a[text()=' Logout']");
+
+	By loginEmail = By.xpath("//input[@data-qa='login-email']");
+	By loginPassword = By.xpath("//input[@data-qa='login-password']");
+	By login = By.xpath("//button[@data-qa='login-button']");
+	
+	By Contact_Name = By.xpath("//input[@data-qa='name']");
+	By Contact_Email = By.xpath("//input[@data-qa='email']");
+	By Contact_Subject = By.xpath("//input[@data-qa='subject']");
+	By Contact_Message = By.xpath("//textarea[@data-qa='message']");	
+	By Contact = By.xpath("//a[text()=' Contact us']");
+	By Contact_File = By.xpath("//input[@type='file']");
+	By Contact_Submit = By.xpath("//input[@data-qa='submit-button']");
+	By ContacttoHome = By.xpath("//a[@class='btn btn-success']");
+	
+	By Product = By.xpath("//a[@href='/products']");
+	By Men = By.xpath("//a[@href='#Men']");
+	By Tshirt_link = By.xpath("//a[text()='Tshirts ']");
+	By Tshirt = By.xpath("//a[@href='javascript:void();']");
+	By Continue_Cart = By.xpath("//button[@data-dismiss='modal']");
+	By Tshirt2 = By.xpath("//a[@data-product-id='2']");
+	By Cart = By.xpath("//a[@href='/view_cart']");
+	By Checkout = By.xpath("//a[text()='Proceed To Checkout']");
+	By Comment = By.xpath("//textarea[@class='form-control']");
+	By PlaceOrder = By.xpath("//a[@href='/payment']");	
+	
+	By NameonCard = By.xpath("//input[@name='name_on_card']");
+	By Cn = By.xpath("//input[@data-qa='card-number']");
+	By Cvc = By.xpath("//input[@data-qa='cvc']");
+	By Expiration_mm = By.xpath("//input[@name='expiry_month']");
+	By Expiration_yy = By.xpath("//input[@data-qa='expiry-year']");
+	By ConfirmOrder = By.xpath("//button[@data-qa='pay-button']");
+	By Order_Continue = By.xpath("//a[@data-qa='continue-button']");
+	@Test
+  public void signupName(String name) throws Exception {
+	  Thread.sleep(2000);
+	  WebElement sName = driver.findElement(signupname);
+	  sName.sendKeys(name);
+	  System.out.println("Name: "+sName.getAttribute("value"));
+  }
+  public void signupEmail(String email) throws Exception {
+	  Thread.sleep(2000);
+	  WebElement sEmail = driver.findElement(signupemail);
+	  sEmail.sendKeys(email);
+	  System.out.println("Email: "+sEmail.getAttribute("value"));
+  }
+  public void clickSignup() throws Exception {
+	  Thread.sleep(2000);
+	  driver.findElement(signupButton).click();
+  }
+  public void selectTitle(String type) throws Exception {
+	  Thread.sleep(2000);
+	  String displayType = "";
+	  if(type.equals("Male")) {
+		  WebElement male = driver.findElement(selectMale);
+		  male.click();
+		  displayType=male.getAttribute("value");
+	  }else {
+		  WebElement female = driver.findElement(selectFemale);
+		  female.click();
+		  displayType=female.getAttribute("value");
+	  }
+	  System.out.println("Gender: "+displayType);
+  }
+  public void enterPassword(String pword) throws Exception {
+	  Thread.sleep(2000);
+	  WebElement p = driver.findElement(password);
+	  p.sendKeys(pword);
+	  System.out.println("Password "+p.getAttribute("value"));
+  }
+  public void enterFirstName(String fname) throws Exception {
+	  Thread.sleep(2000);
+	  WebElement f = driver.findElement(firstName);
+	  f.sendKeys(fname);
+	  System.out.println("FirstName: "+f.getAttribute("value"));
+  }
+  public void enterLastName(String lname) throws Exception {
+	  Thread.sleep(2000);
+	  WebElement l = driver.findElement(lastName);
+	  l.sendKeys(lname);
+	  System.out.println("Last Name "+l.getAttribute("value"));
+  }
+  public void enterCompany(String compny) throws Exception {
+	  Thread.sleep(2000);
+	  WebElement c = driver.findElement(company);
+	  c.sendKeys(compny);
+	  System.out.println("Company "+c.getAttribute("value"));
+  }
+
+  public void enterAddress(String adrs) throws Exception {
+	  Thread.sleep(2000);
+	  WebElement a = driver.findElement(address);
+	  a.sendKeys(adrs);
+	  System.out.println("Address "+a.getAttribute("value"));
+  }
+	public void selectCountry(String ctry) throws Exception {
+		Thread.sleep(2000);
+		WebElement c = driver.findElement(country);
+		Select dropdown = new Select(c);
+		dropdown.selectByVisibleText(ctry);
+		System.out.println("Country: "+c.getAttribute("value"));
+	}
+	public void enterState(String ste) throws Exception {
+		Thread.sleep(2000);
+		  WebElement a = driver.findElement(state);
+		  a.sendKeys(ste);
+		  System.out.println("State "+a.getAttribute("value"));
+	  }
+	public void enterCity(String cty) throws Exception {
+		Thread.sleep(2000);
+		WebElement a = driver.findElement(city);
+		a.sendKeys(cty);
+		System.out.println("City "+a.getAttribute("value"));
+	  }
+	public void enterZipcode(String pin) throws Exception{
+		Thread.sleep(2000);
+		WebElement a = driver.findElement(zipcode);
+		a.sendKeys(pin);
+		System.out.println("Zipcode "+a.getAttribute("value"));
+	  }
+	public void enterNumber(String num) throws Exception{
+		  driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		  WebElement a = driver.findElement(mobileNumber);
+		  a.sendKeys(num);
+		  System.out.println("Mobile "+a.getAttribute("value"));
+	  }
+	public void createAccount() throws Exception {
+		Thread.sleep(2000);
+		driver.findElement(submit).click();
+		System.out.println("Account Created");
+	}  
+	public void continueButton() throws Exception {
+		Thread.sleep(2000);
+		  driver.findElement(afterSubmit).click();
+	}
+	public void clickLogout() throws Exception {
+		  driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		driver.findElement(logout).click();
+	}
+	public void loginEmail(String email) throws Exception {
+		Thread.sleep(2000);
+		  WebElement l = driver.findElement(loginEmail);
+		  l.sendKeys(email);
+		  System.out.println("Login Email: "+l.getAttribute("value"));
+	}
+	public void loginPassword(String password) throws Exception {
+		Thread.sleep(2000);
+		  WebElement p = driver.findElement(loginPassword);
+		  p.sendKeys(password);
+		  System.out.println("Login Password: "+p.getAttribute("value"));
+	}
+	public void loginButton() throws Exception{
+		Thread.sleep(2000);
+		  driver.findElement(login).click();
+	}
+	public void Contact() throws Exception{
+		Thread.sleep(2000);
+		  driver.findElement(Contact).click();
+	}
+	public void Contact_Name(String Cn) throws Exception {
+		Thread.sleep(2000);
+		  driver.findElement(Contact_Name).sendKeys(Cn);
+	}
+	public void Contact_Email(String Em) throws Exception {
+		Thread.sleep(2000);
+		  driver.findElement(Contact_Email).sendKeys(Em);
+	}
+	public void Contact_Subject(String S) throws Exception {
+		Thread.sleep(2000);
+		  driver.findElement(Contact_Subject).sendKeys(S);
+	}
+	public void Contact_Message(String M) throws Exception {
+		Thread.sleep(2000);
+		  driver.findElement(Contact_Message).sendKeys(M);
+	}
+	public void Contact_File() throws Exception {
+		Thread.sleep(2000);
+		  WebElement File = driver.findElement(Contact_File);
+		  File.sendKeys("C:\\Users\\Praveenraj.t\\Maven\\Project\\src\\test\\java\\test\\input.properties");
+	}
+	public void Contact_Submit() throws Exception {
+		Thread.sleep(2000);
+		  driver.findElement(Contact_Submit).click();
+	}
+	public void ContacttoHome() throws Exception {
+		Thread.sleep(2000);
+		driver.findElement(ContacttoHome).click();
+	}
+	public void Product() throws Exception{
+		Thread.sleep(2000);
+		driver.findElement(Product).click();
+	}
+	public void Men()throws Exception {
+		Thread.sleep(2000);
+		driver.findElement(Men).click();
+	}
+	public void Tshirt_link() throws Exception {
+		Thread.sleep(3000);
+		driver.findElement(Tshirt_link).click();
+	}
+	public void Tshirt() throws Exception {
+		Thread.sleep(3000);
+		driver.findElement(Tshirt).click();
+	}
+	public void Continue_Cart() throws Exception {
+		Thread.sleep(3000);
+		driver.findElement(Continue_Cart).click();
+	}
+	public void Tshirt2() throws Exception {
+		Thread.sleep(3000);
+		driver.findElement(Tshirt2).click();
+	}
+	public void Cart() throws Exception {
+		Thread.sleep(3000);
+		driver.findElement(Cart).click();
+	}
+	public void Checkout() throws Exception {
+		Thread.sleep(2000);
+		driver.findElement(Checkout).click();
+	}
+	public void Comment(String cm) throws Exception {
+		Thread.sleep(2000);
+		driver.findElement(Comment).sendKeys(cm);
+	}
+	public void PlaceOrder() throws Exception {
+		Thread.sleep(2000);
+		driver.findElement(PlaceOrder).click();
+	}
+	public void NameonCard(String card) throws Exception {
+		Thread.sleep(2000);
+		driver.findElement(NameonCard).sendKeys(card);
+	}
+	public void Cn(String cn) throws Exception {
+		Thread.sleep(2000);
+		driver.findElement(Cn).sendKeys(cn);
+	}
+	public void Cvc(String cvc) throws Exception {
+		Thread.sleep(2000);
+		driver.findElement(Cvc).sendKeys(cvc);
+	}
+	public void Emonth(String m) throws Exception{
+		Thread.sleep(2000);
+		driver.findElement(Expiration_mm).sendKeys(m);
+	}
+	public void Eyear(String m) throws Exception {
+		Thread.sleep(2000);
+		driver.findElement(Expiration_yy).sendKeys(m);
+	}
+	public void ConfirmOrder() throws Exception{
+		Thread.sleep(2000);
+		driver.findElement(ConfirmOrder).click();
+	}
+	public boolean isAlreadyRegistered() {
+		  driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+		  boolean b;
+		  try {
+			  WebElement isPresent = driver.findElement(By.xpath("//p[text()='Email Address already exist!']"));
+			  return isPresent.isDisplayed();
+		  }catch(Exception e) {
+			  b= false;
+		  }
+		  return b;
+	}
+  public ElementLocator(WebDriver driver) {
+	  this.driver = driver;  
+  }
+}
